@@ -1,0 +1,11 @@
+- hosts: localhost
+  tasks:
+    #    - include: tasks/ssh.yml
+    - include_tasks: tasks/install.yml
+    - include_tasks: tasks/git.yml
+    - include_tasks: tasks/dotfiles.yml
+      #    - include: tasks/productivity.yml
+      #    - include: tasks/lsp.yml
+
+
+

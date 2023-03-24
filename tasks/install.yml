@@ -1,0 +1,55 @@
+- name: install ( htop, lsof, zip, unzip, i3, polybar, picom, rofi )
+  become: true
+  dnf:
+    name: [ "htop", "lsof", "zip", "unzip", "i3", "polybar", "picom", rofi ]
+    state: present
+- name: install git
+  become: true
+  dnf:
+    name: [ "git" ]
+    state: present
+- name: install tmux
+  become: true
+  dnf:
+    name: tmux
+    state: present
+- name: install neovim
+  become: true
+  dnf:
+    name: neovim
+    state: present
+- name: Get Packer
+  ansible.builtin.git:
+    repo: 'https://github.com/wbthomason/packer.nvim'
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  tags:
+    - install
+    - neovim
+- name: install node, npm
+  become: true
+  dnf:
+    name: [ "nodejs", "npm" ]
+    state: present
+- name: install java, maven
+  become: true
+  dnf:
+    name: ["java", "maven" ]
+    state: present
+- name: is zsh installed?
+  stat:
+    path: /home/irakli/.oh-my-zsh
+  register: oh_my_exists
+- name: install zsh
+  become: true
+  dnf:
+    name: "zsh"
+    state: present
+- name: install oh-my-zsh
+  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
+  when: oh_my_exists.stat.exists == False
+- name: install zsh-autosuggestions
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
+  when: oh_my_exists.stat.exists == False
+
