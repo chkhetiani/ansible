@@ -52,4 +52,10 @@
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
     dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
   when: oh_my_exists.stat.exists == False
-
+- name: install (fzf, gimp, xclip, tldr, ripgrep, shutter)
+  become: true
+  dnf:
+    name: [ "fzf", "gimp", "xclip", "tldr", "ripgrep", "shutter" ]
+  tags:
+    - install
+    - productivity
