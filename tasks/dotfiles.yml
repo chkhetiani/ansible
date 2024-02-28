@@ -1,12 +1,8 @@
-- name: is dofiles installed?
-  stat:
-    path: /home/irakli/.cfg
-  register: dotfiles_exists
-- name: clone bare dotfiles
+- name: checkout dotfiles
+  ansible.builtin.git:
+    repo: git@github.com:chkhetiani/dotfiles.git
+    dest: /home/irakli/dotfiles
+- name: stow it out
   shell: |
-    git clone --bare git@github.com:chkhetiani/.dotfiles.git $HOME/.cfg
-    /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME checkout
-    /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME config --local status.showUntrackedFiles no
-  when: dotfiles_exists.stat.exists == False
-
-
+    stow -t /home/irakli -d /home/irakli/dotfiles -v * --adopt
+    git -C /home/irakli/dotfiles/ restore .

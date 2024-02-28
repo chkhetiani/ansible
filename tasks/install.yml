@@ -3,6 +3,11 @@
   dnf:
     name: [ "htop", "lsof", "zip", "unzip", "i3", "polybar", "picom", rofi ]
     state: present
+- name: install stow
+  become: true
+  dnf:
+    name: stow
+    state: present
 - name: install git
   become: true
   dnf:
