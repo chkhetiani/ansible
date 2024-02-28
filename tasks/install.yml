@@ -57,6 +57,11 @@
     repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
     dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
   when: oh_my_exists.stat.exists == False
+- name: install zsh-syntax-highlighting
+  become: true
+  dnf:
+    name: "zsh-syntax-highlighting"
+    state: present
 - name: install (fzf, gimp, xclip, tldr, ripgrep, shutter)
   become: true
   dnf:
