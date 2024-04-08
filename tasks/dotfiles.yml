@@ -1,6 +1,6 @@
 - name: checkout dotfiles
   ansible.builtin.git:
-    repo: git@github.com:chkhetiani/dotfiles.git
+    repo: https://github.com/chkhetiani/dotfiles.git
     dest: /home/irakli/dotfiles
 - name: stow it out
   shell: |
