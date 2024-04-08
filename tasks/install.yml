@@ -1,8 +1,17 @@
-- name: install ( htop, lsof, zip, unzip, i3, polybar, picom, rofi )
+- name: install ( htop, lsof, zip, unzip, i3, polybar, picom, rofi, alacritty )
   become: true
   dnf:
-    name: [ "htop", "lsof", "zip", "unzip", "i3", "polybar", "picom", rofi ]
+    name: [ "htop", "lsof", "zip", "unzip", "i3", "polybar", "picom", "rofi", "alacritty" ]
     state: present
+- name: enable repos
+  become: true
+  dnf:
+    name: [ "fedora-workstation-repositories" ]
+    state: present
+- name: enable and install google chrome
+  shell: |
+    sudo dnf config-manager --set-enabled google-chrome
+    sudo dnf install google-chrome-stable
 - name: install stow
   become: true
   dnf:
