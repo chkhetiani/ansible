@@ -1,7 +1,7 @@
-- name: install ( htop, lsof, zip, unzip, i3, polybar, picom, rofi, alacritty )
+- name: install ( htop, lsof, zip, unzip, i3, polybar, picom, rofi, alacritty, cpulimit )
   become: true
   dnf:
-    name: [ "htop", "lsof", "zip", "unzip", "i3", "polybar", "picom", "rofi", "alacritty" ]
+    name: [ "htop", "lsof", "zip", "unzip", "i3", "polybar", "picom", "rofi", "alacritty", "cpulimit" ]
     state: present
 - name: enable repos
   become: true
