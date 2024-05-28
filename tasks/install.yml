@@ -71,10 +71,10 @@
   dnf:
     name: "zsh-syntax-highlighting"
     state: present
-- name: install (fzf, gimp, xclip, tldr, ripgrep, shutter)
+- name: install (fzf, gimp, xclip, tldr, ripgrep, shutter, simplescreenrecorder)
   become: true
   dnf:
-    name: [ "fzf", "gimp", "xclip", "tldr", "ripgrep", "shutter" ]
+    name: [ "fzf", "gimp", "xclip", "tldr", "ripgrep", "shutter", "simplescreenrecorder" ]
   tags:
     - install
     - productivity
