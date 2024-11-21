@@ -73,10 +73,15 @@
   dnf:
     name: "zsh-syntax-highlighting"
     state: present
+- name: is pure installed?
+  stat:
+    path: $HOME/.zsh/pure
+  register: pure_exists
 - name: install pure prompt
   shell: |
     mkdir -p "$HOME/.zsh"
     git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+  when: pure_exists.stat.exists == False
 - name: install (fzf, gimp, xclip, tldr, ripgrep, shutter, simplescreenrecorder)
   become: true
   dnf:
