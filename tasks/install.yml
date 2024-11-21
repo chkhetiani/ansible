@@ -87,3 +87,8 @@
 - name: change shell
   shell: |
     chsh -s (which zsh)
+
+- name: install libreoffice
+  become: true
+  dnf:
+    name: [ "libreoffice" ]
