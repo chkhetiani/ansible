@@ -1,7 +1,7 @@
-- name: install ( htop, lsof, zip, unzip, i3, polybar, picom, rofi, alacritty, cpulimit, conky )
+- name: install ( htop, lsof, zip, unzip, i3, polybar, picom, rofi, alacritty, cpulimit, conky, mpv, btop )
   become: true
   dnf:
-    name: [ "htop", "lsof", "zip", "unzip", "i3", "polybar", "picom", "rofi", "alacritty", "cpulimit", "conky" ]
+    name: [ "htop", "lsof", "zip", "unzip", "i3", "polybar", "picom", "rofi", "alacritty", "cpulimit", "conky", "mpv", "btop" ]
     state: present
 - name: enable repos
   become: true
@@ -10,7 +10,7 @@
     state: present
 - name: enable and install google chrome
   shell: |
-    sudo dnf config-manager --set-enabled google-chrome
+    sudo dnf config-manager setopt google-chrome.enabled=1
     sudo dnf install google-chrome-stable
 - name: install stow
   become: true
@@ -32,13 +32,6 @@
   dnf:
     name: neovim
     state: present
-- name: Get Packer
-  ansible.builtin.git:
-    repo: 'https://github.com/wbthomason/packer.nvim'
-    dest: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
-  tags:
-    - install
-    - neovim
 - name: install node, npm
   become: true
   dnf:
@@ -48,6 +41,11 @@
   become: true
   dnf:
     name: ["java", "maven" ]
+    state: present
+- name: install dotnet, go
+  become: true
+  dnf:
+    name: ["dotnet-sdk-8.0", "golang" ]
     state: present
 - name: is zsh installed?
   stat:
