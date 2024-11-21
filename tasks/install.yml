@@ -91,7 +91,8 @@
   become: true
   dnf:
     name: [ "libreoffice" ]
-- name: install blueman
+- name: install nitrogen
   become: true
   dnf:
-    name: [ "blueman" ]
+    name: [ "nitrogen" ]
+
