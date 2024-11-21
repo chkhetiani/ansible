@@ -89,9 +89,9 @@
   tags:
     - install
     - productivity
-- name: change shell
-  shell: |
-    chsh -s $(which zsh)
+# - name: change shell
+#   shell: |
+#     chsh -s $(which zsh)
 - name: install libreoffice
   become: true
   dnf:
