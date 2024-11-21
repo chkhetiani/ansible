@@ -1,3 +1,7 @@
+- name: enable rpm fusion
+  shell: |
+    sudo dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+    sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 - name: install ( htop, lsof, zip, unzip, i3, polybar, picom, rofi, alacritty, cpulimit, conky, mpv, btop )
   become: true
   dnf:
@@ -69,6 +73,10 @@
   dnf:
     name: "zsh-syntax-highlighting"
     state: present
+- name: install pure prompt
+  shell: |
+    mkdir -p "$HOME/.zsh"
+    git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 - name: install (fzf, gimp, xclip, tldr, ripgrep, shutter, simplescreenrecorder)
   become: true
   dnf:
@@ -76,3 +84,6 @@
   tags:
     - install
     - productivity
+- name: change shell
+  shell: |
+    chsh -s (which zsh)
